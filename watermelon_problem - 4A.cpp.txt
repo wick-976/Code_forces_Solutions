@@ -1,0 +1,14 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int weight_in_kg;
+    cin >> weight_in_kg;
+
+    if (weight_in_kg > 2 && weight_in_kg % 2 == 0) {
+        cout << "YES";
+    } else {
+        cout << "NO";
+    }
+    return 0;
+}
