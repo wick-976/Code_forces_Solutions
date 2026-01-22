@@ -17,3 +17,9 @@ int main() {
     cout << ans;
     return 0;
 }
+
+// Explanation:
+// T(O)-> O(N)
+// S(O)-> O(1)  
+//approach: Maintain current passenger, update max passengers at each stop.
+//pattern: Running sum + maximum prefix. 
