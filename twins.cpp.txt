@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+
+    vector<int> arr(n);
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+
+    int total = accumulate(arr.begin(), arr.end(), 0);
+    int my_sum = 0, count = 0;
+
+    sort(arr.begin(), arr.end(), greater<int>());
+
+    for(int i = 0; i < n; i++){
+        my_sum += arr[i];
+        count++;
+
+        if(my_sum > total - my_sum){
+            break;
+        }
+    }
+
+    cout << count;
+}
