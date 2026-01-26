@@ -1,0 +1,18 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    string user_name;
+    cin >> user_name;
+
+    // store distinct characters
+    set<char> distinct_chars(user_name.begin(), user_name.end());
+
+    if (distinct_chars.size() % 2 == 0) {
+        cout << "CHAT WITH HER!";
+    } else {
+        cout << "IGNORE HIM!";
+    }
+
+    return 0;
+}
