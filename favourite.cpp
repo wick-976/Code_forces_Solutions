@@ -2,24 +2,30 @@
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
+    int t;
+    cin >> t;
 
-    vector<int> arr(n);
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
+    while (t--) {
+        int n;
+        cin >> n;
 
-    int l = 0, r = n - 1;
-
-    while (l <= r) {
-        if (l == r) {
-            cout << arr[l] << " ";
-        } else {
-            cout << arr[l] << " " << arr[r] << " ";
+        vector<int> arr(n);
+        for (int i = 0; i < n; i++) {
+            cin >> arr[i];
         }
-        l++;
-        r--;
+
+        int l = 0, r = n - 1;
+
+        while (l <= r) {
+            if (l == r) {
+                cout << arr[l] << " ";
+            } else {
+                cout << arr[l] << " " << arr[r] << " ";
+            }
+            l++;
+            r--;
+        }
+        cout << "\n"; 
     }
 
     return 0;
