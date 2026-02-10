@@ -12,31 +12,44 @@ int main() {
     vector<long long> a(n);
     for (int i = 0; i < n; i++) cin >> a[i];
 
-    long long ops = 0;          // minimum operations needed
-    long long prev = 0;         // minimum possible previous value
+    auto can = [&](long long k) {
+        long long prev = 0;
 
-    for (int i = 0; i < n; i++) {
-        long long cur = a[i];
+        for (int i = 0; i < n; i++) {
+            long long x = a[i];
 
-        if (cur + ops < m) {
-            // no wrap possible
-            if (cur + ops < prev) {
-                ops += prev - (cur + ops);
-            } else {
-                prev = cur + ops;
+            // Case 1: no wrap
+            if (x + k < m) {
+                if (prev > x + k) return false;
+                prev = max(prev, x);
             }
+            // Case 2: wrap possible
+            else {
+                long long wrapped = (x + k) % m;
+                if (prev <= wrapped) {
+                    // choose wrapped part
+                } else if (prev <= x + k) {
+                    prev = max(prev, x);
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+
+    long long lo = 0, hi = m, ans = m;
+
+    while (lo <= hi) {
+        long long mid = (lo + hi) / 2;
+        if (can(mid)) {
+            ans = mid;
+            hi = mid - 1;
         } else {
-            // wrap is possible
-            long long wrapped = (cur + ops) % m;
-            if (wrapped < prev) {
-                // must increase ops to avoid bad wrap
-                ops += prev - wrapped;
-            } else {
-                prev = wrapped;
-            }
+            lo = mid + 1;
         }
     }
 
-    cout << ops << "\n";
+    cout << ans << "\n";
     return 0;
 }
