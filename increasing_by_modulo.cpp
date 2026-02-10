@@ -12,24 +12,24 @@ int main() {
     vector<long long> a(n);
     for (int i = 0; i < n; i++) cin >> a[i];
 
-    long long ops = 0;
-    long long prev = 0;
+    long long ops = 0;          // minimum operations needed
+    long long prev = 0;         // minimum possible previous value
 
     for (int i = 0; i < n; i++) {
         long long cur = a[i];
 
         if (cur + ops < m) {
-            // no wrap
+            // no wrap possible
             if (cur + ops < prev) {
                 ops += prev - (cur + ops);
             } else {
                 prev = cur + ops;
             }
         } else {
-            // wrap possible
+            // wrap is possible
             long long wrapped = (cur + ops) % m;
             if (wrapped < prev) {
-                // must increase ops to avoid wrap
+                // must increase ops to avoid bad wrap
                 ops += prev - wrapped;
             } else {
                 prev = wrapped;
