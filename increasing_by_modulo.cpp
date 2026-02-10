@@ -12,20 +12,29 @@ int main() {
     vector<long long> a(n);
     for (int i = 0; i < n; i++) cin >> a[i];
 
-    long long ops = 0;        // number of operations used
-    long long prev = a[0];   // previous value after ops
+    long long ops = 0;
+    long long prev = 0;
 
-    for (int i = 1; i < n; i++) {
-        long long cur = (a[i] + ops) % m;
+    for (int i = 0; i < n; i++) {
+        long long cur = a[i];
 
-        if (cur < prev) {
-            // need to increase ops so that cur >= prev
-            long long need = prev - cur;
-            ops += need;
-            cur = (cur + need) % m;
+        if (cur + ops < m) {
+            // no wrap
+            if (cur + ops < prev) {
+                ops += prev - (cur + ops);
+            } else {
+                prev = cur + ops;
+            }
+        } else {
+            // wrap possible
+            long long wrapped = (cur + ops) % m;
+            if (wrapped < prev) {
+                // must increase ops to avoid wrap
+                ops += prev - wrapped;
+            } else {
+                prev = wrapped;
+            }
         }
-
-        prev = cur;
     }
 
     cout << ops << "\n";
